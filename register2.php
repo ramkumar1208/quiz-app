@@ -6,12 +6,14 @@
         $u_mobile=$_POST['u_mobile'];
         $u_dob=$_POST['date_of_birth'];
         $u_pass=$_POST['u_pass'];
+        $u_ic=$post['u_ic'];
+        $u_batch=$post['u_batch'];
         $search_query="select * from `users` where `user_email`='$u_email'";
         $search_users=mysqli_query($con,$search_query);
         if(mysqli_num_rows($search_users)>0){
             
         }
-        $insert_query="insert into users(`user_name`,`mobile`,`user_email`,`user_dob`,`user_pass`) values('$u_name','$u_mobile','$u_email','$u_dob','$u_pass')";
+        $insert_query="insert into users(`user_name`,`mobile`,`user_email`,`user_dob`,`user_pass`,`ic_number`,`batch_code`) values('$u_name','$u_mobile','$u_email','$u_dob','$u_pass','$u_ic','$u_batch')";
         $insert_data=mysqli_query($con,$insert_query);
         if($insert_data){
           header("Location: login1.php");
@@ -58,6 +60,10 @@
         <input type="text" placeholder="Enter your mobile" required name="u_mobile"/>
         <label>Date of Birth</label>
         <input type="date" placeholder="Enter your date of birth" required name="date_of_birth"/>
+        <label>IC Number</label>
+        <input type="text" placeholder="Enter IC Number" required name="u_ic"/>
+        <label>Batch Code</label>
+        <input type="name" placeholder="Enter Batch code" required name="u_batch"/>        
         <label>Password</label>
         <input type="password" placeholder="" name="u_pass"/>
         <label>Confirm Password</label>

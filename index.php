@@ -1,145 +1,121 @@
-<?php 
+<?php
+error_reporting(E_ALL);
 session_start();
-// $_SESSION['user']='';
-// $_SESSION['message']='';
+if (isset($_SESSION['message']) && $_SESSION['message'] === "You are already logged in from another device.") {
+  
+}else if(empty($_SESSION['user'])){
+  $_SESSION['message']="Please Login First";
+}
 ?>
 <!DOCTYPE html>
 <!-- Coding by CodingLab || www.codinglabweb.com -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="s_new.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- Unicons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-    <style>
-  .center-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* This will make the div vertically centered on the viewport */
-  }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz App</title>
+  <!-- <link rel="stylesheet" href="s_new.css" /> -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+    .bs-example{
+    	margin: 5px;
+    }
+    .container-fluid {
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.center-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* This will make the div vertically centered on the viewport */
+    }
 </style>
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <nav class="nav">
-        <a href="index.php" class="nav_logo">College Name</a>
+</head>
 
-        <ul class="nav_items">
-          <li class="nav_item">
-            <a href="index.php" class="nav_link">Home</a>
-            <a href="quiz.php" class="nav_link">Quiz</a>
-            <a href="#" class="nav_link">Contact</a>
-            <a href="admin.php" class="nav_link">Admin</a>
-          </li>
-        </ul>
-        <?php 
+<body>
+
+  <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+  <a class="navbar-brand" href="index.php">
+      <img src="logo.png" alt="" width=50px > 
+    </a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="viewquiz.php">Quiz</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin.php">Admin</a>
+      </li>
+    </ul>
+    
+    <div class="bs-example">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 bg-light text-right">
+            <?php 
         if(isset($_SESSION['user'])){ 
-          $email=$_SESSION['user'];
-          echo $email;
-          ?>
-          <a href="logout.php"><button class="button" id="form-open">Logout</button></a>
-        <?php }else{ ?>
-          <a href="login1.php"><button class="button" id="form-open">Login</button></a>
-        <?php }
-        ?>
-        
-      </nav>
-    </header>
-    <div class="home">
-      <div class="center-div"> 
-    <?php if(isset($_SESSION['message'])!=""){ 
-      ?>
-      <div class="alert alert-danger alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
-      <?php 
-      echo $_SESSION['message']; 
-      ?></div> <?php 
-    } 
-       ?>
-     </div>  
+          $user_email=$_SESSION['user'];
+          echo $user_email;  ?>
+              <a href="logout.php"><button type="button" class="btn btn-primary">Log-out</button></a>
+          <?php }else{ ?>        
+                <a href="login1.php"><button type="button" class="btn btn-primary">Login</button></a>
+                <?php } ?>    
+              </div>
+        </div>
+    </div>
+</div>
+  
   </div>
-    <!-- Home -->
-    <!-- <section class="home">
-      <div class="form_container">
-        <i class="uil uil-times form_close"></i>
-        Login From
-        <div class="form login_form">
-          <form action="login.php" method="post">
-            <h2>Login</h2>
-
-            <div class="input_box">
-              <input type="email" placeholder="Enter your email" required />
-              <i class="uil uil-envelope-alt email"></i>
-            </div>
-            <div class="input_box">
-              <input type="password" placeholder="Enter your password" required />
-              <i class="uil uil-lock password"></i>
-              <i class="uil uil-eye-slash pw_hide"></i>
-            </div>
-
-            <div class="option_field">
-              <span class="checkbox">
-                <input type="checkbox" id="check" />
-                <label for="check">Remember me</label>
-              </span>
-              <a href="#" class="forgot_pw">Forgot password?</a>
-            </div>
-
-            <button class="button">Login Now</button>
-
-            <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
-          </form>
+</nav>
+   
+<div class="center-div">
+    <?php 
+    if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        $_SESSION['message'] = ""; // Clear the message after displaying it
+    ?>
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <?php echo $message; ?>
+            <?php 
+            if ($message === "You are already logged in from another device.") {  
+            ?>
+                <a href="logout.php"><button>Logout That Device</button></a>
+            <?php 
+            } else if ($message === "you are logged out from another device. Please Login first") { 
+                session_unset();
+                session_destroy();
+            ?>
+                <a href="login1.php"><button>Login</button></a>
+            <?php 
+            } 
+            ?>
         </div>
+    <?php 
+    } 
+    ?>
+</div>
 
-        Signup From
-        <div class="form signup_form">
-          <form action="signup.php" method="post">
-            <h2>Signup</h2>
-            <div class="input_box">
-              <input type="name" placeholder="Enter your name" required name="u_name"/>
-              <i class="uil uil-envelope-alt name"></i>
-            </div>
-            <div class="input_box">
-              <input type="email" placeholder="Enter your email" required name="u_email"/>
-              <i class="uil uil-envelope-alt email"></i>
-            </div>
-            <div class="input_box">
-              <input type="text" placeholder="Enter your mobile" required name="u_mobile"/>
-              <i class="uil uil-envelope-alt mobile"></i>
-            </div>
-            <div class="input_box">
-              <input type="date" placeholder="Enter your date of birth" required name="date_of_birth"/>
-              <i class="uil uil-envelope-alt dob"></i>
-            </div>
+  </div>
 
-            <div class="input_box">
-              <input type="password" placeholder="Create password" required name="u_pass"/>
-              <i class="uil uil-lock password"></i>
-              <i class="uil uil-eye-slash pw_hide"></i>
-            </div>
-            <div class="input_box">
-              <input type="password" placeholder="Confirm password" required />
-              <i class="uil uil-lock password"></i>
-              <i class="uil uil-eye-slash pw_hide"></i>
-            </div>
+</body>
 
-            <button class="button">Signup Now</button>
-            <input type="submit" value="Signup Now" name="signup" class="button">
-
-            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
-          </form>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- <script src="script.js"></script> -->
-  </body>
 </html>
