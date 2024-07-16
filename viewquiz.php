@@ -160,7 +160,7 @@ if($session_id!=$session_from_db)
                 ?></td>
            <td>
     <?php 
-    date_default_timezone_set('Asia/Kolkata'); // Set the correct timezone
+    date_default_timezone_set('Asia/Singapore'); // Set the correct timezone
     $current_time = date("Y-m-d H:i:s");
     $current_date = date("Y-m-d");
     $current_time_only = date("H:i:s"); // Current time for comparison

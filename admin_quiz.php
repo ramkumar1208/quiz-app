@@ -58,6 +58,10 @@ if(!$_SESSION['admin']){
       <li class="nav-item">
         <a class="nav-link" href="viewmarks.php">Student Marks</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="student_management.php">Students managemant</a>
+      </li>
+      
     </ul>
     
     <div class="bs-example">

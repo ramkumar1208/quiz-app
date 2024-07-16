@@ -112,46 +112,59 @@ $admin=$_SESSION['admin'];
   </div>
 </nav>
 <div class="view-quizzes">
-    <h2>Quiz Schedule</h2>
-    <form action="editquiz.php" method="post">
-    <label for="batch_code">search by Batch Code</label>&nbsp;&nbsp;<input type="text" name="batch_code" id="batch_code">&nbsp;&nbsp;<input type="submit" name="search" value="Search">
-    </form>
+    <h2>Edit students</h2>
+    <form action="edit_students.php" method="post">
+    <label for="batch_code">search by Batch Code</label>&nbsp;&nbsp;<input type="text" name="batch_code" id="batch_code">&nbsp;&nbsp;<br>
+    <label for="batch_code">search by IC Number</label>&nbsp;&nbsp;<input type="text" name="ic_number" id="ic_number">&nbsp;&nbsp;<input type="submit" name="search" value="Search">
+    
+</form>
     <?php 
-      if(isset($_POST['search'])){
-        $batch_code = $_POST['batch_code'];
-        $view_quiz = "SELECT * FROM quiz_topics where batch_code='$batch_code'";        
-      }else{
-        $view_quiz = "SELECT * FROM quiz_topics";
-      }
+    
+        if(isset($_POST['batch_code'])){
+            $batch_code = $_POST['batch_code'];
+            $view_quiz = "SELECT * FROM users where batch_code='$batch_code'";        
+          }
+          else if(isset($_POST['ic_number'])){
+            $ic_number = $_POST['ic_number'];
+            $view_quiz = "SELECT * FROM users where ic_number='$ic_number'";
+          }
+          else{
+            $view_quiz = "SELECT * FROM users";
+          }
+    
+      
         $view_query = mysqli_query($con, $view_quiz);
         if($view_query && mysqli_num_rows($view_query) > 0) {
     ?>
     <table>
         <thead>
             <tr>
-                <th>Batch</th>
-                <th>Quiz Topic</th>
-                <th>Date</th>
-                <th>Quiz Time</th>
-                <th>Total Time</th>
+                <th>Batch Code</th>
+                <th>IC Number</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email id</th>
+                <th>Date of Birth</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php  
                 while($row = mysqli_fetch_assoc($view_query)) {
-                    $quiz_link = $row['quiz_link'];
-                    $quiz_id=$row['quiz_id'];
+                    // $quiz_link = $row['quiz_link'];
+                    $ic_number=$row['ic_number'];
             ?>     
             <tr>
                 <td><?php echo $row['batch_code']; ?></td>
-                <td><?php echo $row['quiz_topic']; ?></td>
-                <td><?php echo $row['quiz_date']; ?></td>
-                <td><?php echo $row['quiz_time']; ?></td>
-                <td><?php echo $row['total_time']; ?></td>
+                <td><?php echo $row['ic_number']; ?></td>
+                <td><?php echo $row['user_name']; ?></td>
+                <td><?php echo $row['mobile']; ?></td> 
+                <td><?php echo $row['user_email']; ?></td>
+                <td><?php echo $row['user_dob']; ?></td>
+                
                 <td>
-                <form action="edit_quizes.php" method="post" >
-                <input type="hidden" name="quiz_id" value="<?php echo $quiz_id; ?>">
+                <form action="edit_student_admin.php" method="post" >
+                <input type="hidden" name="ic_number" value="<?php echo $ic_number; ?>">
                 <input type="submit" name="edit" value="Edit">
                 <input type="submit" name="delete" value="Delete" onclick="return confirmDelete();">
                 </form>
@@ -166,7 +179,7 @@ $admin=$_SESSION['admin'];
     </table>
     <?php 
         } else {
-            $_SESSION['message'] = "No quizzes available";
+            $_SESSION['message'] = "No students available from database";
         }
     ?>
 </div>
@@ -192,7 +205,7 @@ $admin=$_SESSION['admin'];
       </div>
       <script>
     function confirmDelete() {
-        return confirm('Are you sure you want to delete this quiz?');
+        return confirm('Are you sure you want to delete this student from database?');
     }
 </script>
 

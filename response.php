@@ -1,5 +1,5 @@
 <?php 
-     date_default_timezone_set('Asia/Kolkata');
+     date_default_timezone_set('Asia/Singapore');
     session_start();
     $from_time=date('Y-m-d H:i:s');
     $to_time=$_SESSION['end_time'];

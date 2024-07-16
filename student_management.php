@@ -1,14 +1,13 @@
 <?php 
 
+?>
+<?php 
+error_reporting(0);
 session_start();
-if (!isset($_SESSION['admin'])) {
-  if (isset($_SESSION['message']) && $_SESSION['message'] === "admin not found") {
-      // Handle the case where the message is already set to "admin not found"
-  } else {
-      $_SESSION['message'] = "admin please login first";
+if(!$_SESSION['admin']){
+    $_SESSION['message']="admin please login first";
+    header("Location: admin.php");
   }
-}
-
 ?> 
 <!DOCTYPE html>
 <!-- Coding by CodingLab || www.codinglabweb.com -->
@@ -17,7 +16,7 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Page</title>
+    <title>Student Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -63,7 +62,6 @@ if (!isset($_SESSION['admin'])) {
         <a class="nav-link" href="student_management.php">Students managemant</a>
       </li>
       
-
     </ul>
     
     <div class="bs-example">
@@ -94,11 +92,34 @@ if (!isset($_SESSION['admin'])) {
         <div class="alert alert-danger alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php echo $message; ?>
+            <?php if ($message === "You are already logged in from another device.") {  ?>
+                <a href="logout.php"><button>Logout That Device</button></a>
+            <?php } ?>
         </div>
     <?php } ?>
 </div>
+<div class="main-section">
+        <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-md-8">
+                <div class="card my-2 p-3">
+                  <div class="card-body">
+                    
+                      <div class="form-check">
+                      <h5 class="card-title py-2">Add Students || Edit Students</h5>
+                      <a href="register2.php" class="quiz-button"><button type="button" class="btn btn-success">Add Students</button></a>
+                      <a href="edit_students.php" class="quiz-button"><button type="button" class="btn btn-success">Edit Student</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>   
+    
+      
 
-  </div>  
-  </div>
-  </body>
+
+</body>
 </html>

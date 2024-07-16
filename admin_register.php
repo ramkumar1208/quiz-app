@@ -35,7 +35,9 @@
   <body>
   <header class="header">
       <nav class="nav">
-        <a href="index.php" class="nav_logo">College Name</a>
+      <a class="navbar-brand" href="index.php">
+      <img src="logo.png" alt="" width=50px > 
+    </a>
 
         <ul class="nav_items">
           <li class="nav_item">
